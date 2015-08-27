@@ -390,13 +390,16 @@ Call a stored procedure.
 __Arguments__
 
 - **procedure** - Name of the stored procedure to be executed.
-- **callback(err, recordsets, returnValue)** - A callback which is called after execution has completed, or an error has occurred. `returnValue` is also accessible as property of recordsets. Optional. If omited, returns [Promise](#promises).
+- **callback(err, recordsets, returnValue)** - A callback which is called after execution has completed, or an error has occurred. `returnValue` is also accessible as property of recordsets. Optional. If omited, returns [Promise](#promises).  Input parameter data types must be formatted properly before the request is executed.
 
 __Example__
 
 ```javascript
 var request = new sql.Request();
+var value = parseInt('10');
+var myDate = new Date('8/25/2015');
 request.input('input_parameter', sql.Int, value);
+request.input('date_parameter', sql.SmallDateTime, myDate);
 request.output('output_parameter', sql.Int);
 request.execute('procedure_name', function(err, recordsets, returnValue) {
     // ... error checks
